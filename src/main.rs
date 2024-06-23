@@ -7,7 +7,8 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     let file_path = &args[1];
 
-    let mut sudoku_grid: SudokuGrid = SudokuGrid::read_from_file(file_path).expect("Failed to read file");
+    let mut sudoku_grid: SudokuGrid =
+        SudokuGrid::read_from_file(file_path).expect("Failed to read file");
 
     println!("<<< SUDOKU LOADED >>>");
     sudoku_grid.display();
@@ -18,5 +19,4 @@ fn main() {
     } else {
         println!("I can't solve this sudoku.");
     }
-
 }

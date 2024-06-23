@@ -2,21 +2,23 @@ use std::fs::File;
 use std::io::{BufRead, BufReader, Error, ErrorKind};
 
 pub struct SudokuGrid {
-    cells: [[u8; 9]; 9]
+    cells: [[u8; 9]; 9],
 }
 
 impl SudokuGrid {
     pub fn new() -> Self {
-        Self {
-            cells: [[0; 9]; 9]
-        }
+        Self { cells: [[0; 9]; 9] }
     }
 
     pub fn display(&self) {
         for row in &self.cells {
             let mut line = String::new();
             for &cell in row {
-                let cell_str = if cell == 0 { ". ".to_string() } else { cell.to_string() + " " };
+                let cell_str = if cell == 0 {
+                    ". ".to_string()
+                } else {
+                    cell.to_string() + " "
+                };
                 line.push_str(&cell_str);
             }
             println!("{line}");
@@ -37,7 +39,10 @@ impl SudokuGrid {
                 if let Some(num) = ch.to_digit(10) {
                     sudoku_grid.set_cell(row, col, num as u8);
                 } else if *ch != '.' {
-                    return Err(Error::new(ErrorKind::InvalidData, "Invalid character in input."));
+                    return Err(Error::new(
+                        ErrorKind::InvalidData,
+                        "Invalid character in input.",
+                    ));
                 }
             }
         }
@@ -93,7 +98,9 @@ impl SudokuGrid {
     }
 
     fn is_valid_move(&self, row: usize, col: usize, num: u8) -> bool {
-        !self.is_in_col(col, num) && !self.is_in_row(row, num) && !self.is_in_subgrid(row - row % 3, col - col % 3, num)
+        !self.is_in_col(col, num)
+            && !self.is_in_row(row, num)
+            && !self.is_in_subgrid(row - row % 3, col - col % 3, num)
     }
 
     pub fn solve(&mut self) -> bool {
