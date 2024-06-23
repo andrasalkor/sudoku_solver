@@ -3,7 +3,7 @@ This is a simple Sudoku solver brute-forcing any Sudoku puzzle it's given as a f
 ## Instructions
 Clone the repository, and then use Rust's `cargo` to build and run the program. For example, in a terminal, enter the following command:
 ```console
-[foo@bar ~]$ cargo run example
+[foo@bar sudoku_solver]$ cargo run example
 ```
 I have provided an `example` file which contains the following Sudoku puzzle:
 ```
